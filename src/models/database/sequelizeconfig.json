@@ -1,0 +1,8 @@
+{
+    "database": "passapalavras",
+    "user": "development",
+    "password": "youshallnotpass",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5434
+}
