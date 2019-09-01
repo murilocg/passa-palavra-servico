@@ -4,5 +4,5 @@
     "password": "youshallnotpass",
     "host": "localhost",
     "dialect": "postgres",
-    "port": 5434
+    "port": 5432
 }
