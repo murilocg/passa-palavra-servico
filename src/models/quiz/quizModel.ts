@@ -1,19 +1,17 @@
-import Quiz from "./Quiz";
-import db  from '../database';
+import Quiz from './Quiz';
+import DB from '../database';
 
 class QuizModel {
+  private quizSchema: any;
 
-    private QuizSchema:any;
+  constructor() {
+    this.quizSchema = DB.QuizSchema;
+  }
 
-    constructor(){
-        this.QuizSchema = db.QuizSchema;
-    }
-
-    async createQuiz(quiz: Quiz): Promise<Quiz>{
-        const result = await this.QuizSchema.create(quiz);
-        return result.dataValues;
-    }
-    
+  createQuiz = async (quiz: Quiz): Promise<Quiz> => {
+    const result = await this.quizSchema.create(quiz);
+    return result.dataValues;
+  };
 }
 
 export default new QuizModel();

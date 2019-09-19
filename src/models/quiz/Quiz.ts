@@ -1,11 +1,10 @@
 export default class Quiz {
-    
-    public id?: number;
-    public title: string;
+  public id?: number;
+  public title: string;
 
-    constructor(quiz: Quiz){
-        const {id, title } = quiz;
-        this.id = id;
-        this.title = title
-    }
+  constructor(quiz: Quiz) {
+    const { id, title } = quiz;
+    this.id = id;
+    this.title = title;
+  }
 }
