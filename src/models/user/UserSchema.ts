@@ -1,4 +1,7 @@
 import { Model, BuildOptions } from "sequelize";
+import bcrypt from "bcryptjs";
+import User from "./User";
+import UserModel from "./UserModel";
 
 interface UserSchemaInterface extends Model {
   readonly id: number;
@@ -31,6 +34,13 @@ const UserSchema = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+
+  schema.beforeSave(async user => {
+    if (user.password) {
+      user.password = await bcrypt.hash(user.password, 8);
+    }
+  });
+
   return schema;
 };
 
