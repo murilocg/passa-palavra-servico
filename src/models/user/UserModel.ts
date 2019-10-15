@@ -24,9 +24,8 @@ class UserModel {
     return result.dataValues;
   };
 
-  checkPassword = async (user: User): Promise<User> => {
-    const dbUser = this.userSchema.findOne({ where: { email: user.email } });
-    return await bcrypt.compare(user.password, dbUser.password);
+  checkPassword = async (user: User, password: string): Promise<User> => {
+    return await bcrypt.compare(password, user.password);
   };
 }
 
