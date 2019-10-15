@@ -3,6 +3,8 @@ import QuestionView from "./views/QuestionView";
 import bodyParser from "body-parser";
 import UserView from "./views/UserView";
 import SessionView from "./views/SessionView";
+import QuizView from "./views/QuizView";
+import AuthMiddleware from "./middlewares/authMiddleware";
 
 const app = express();
 const router = express.Router();
@@ -22,4 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/questions/", router, QuestionView);
 app.use("/users/", router, UserView);
 app.use("/session/", router, SessionView);
+app.use(router, AuthMiddleware);
+app.use("/quiz", router, QuizView);
 export default app;

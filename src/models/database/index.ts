@@ -20,7 +20,8 @@ class DB {
     this.QuestionSchema = this.sequelize.import("../question/QuestionSchema");
     this.AnswerSchema = this.sequelize.import("../answer/AnswerSchema");
     this.QuizSchema.hasMany(this.QuestionSchema);
-    this.QuestionSchema.hasMany(this.AnswerSchema);
+    this.QuizSchema.belongsTo(this.UserSchema);
+    this.QuestionSchema.hasOne(this.AnswerSchema);
   }
 
   async init(populate?: Function) {
