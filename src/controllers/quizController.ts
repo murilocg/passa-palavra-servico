@@ -4,12 +4,7 @@ import { quizModel } from "../models";
 class QuestionController {
   createQuiz = async (req: Request, res: Response) => {
     try {
-      const quiz = {
-        title: req.body.title,
-        user_id: req.body.userId
-      };
-
-      //Falta criar o quiz relacionado ao usuário
+      const quiz = await quizModel.createQuiz({ ...req.body });
 
       res.status(200).send(quiz);
     } catch (erro) {
