@@ -1,12 +1,19 @@
 import QuizModel from '../quiz/quizModel';
 import QuestionModel from '../question/questionModel';
 import AnswerModel from '../answer/answerModel';
+import UserModel from '../user/UserModel';
 const data = require('./data.json');
 
 const populateDatabase = async () => {
   const keys = Object.keys(data);
+
+  const user = await UserModel.createUser({
+    email: 'admin@gmail.com.br',
+    name: 'Admin',
+    password: 'admin'
+  });
   const promisesQuiz = keys.map(title => {
-    return QuizModel.createQuiz({ title });
+    return QuizModel.createQuiz({ title, userId: user.id });
   });
 
   const quizzes = await Promise.all(promisesQuiz);

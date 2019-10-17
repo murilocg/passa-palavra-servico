@@ -18,7 +18,7 @@ class QuestionModel {
     return result.dataValues;
   };
 
-  getQuestion = async (quizId: number, letter: string): Promise<Question> => {
+  nextQuestion = async (quizId: number, letter: string): Promise<Question> => {
     const data = await this.questionSchema.findAll({
       where: { quizId, letter }
     });
@@ -31,6 +31,20 @@ class QuestionModel {
     const answer: Answer = await answerModel.findAnswer(questionId);
     if (!answer) throw new Error('Nenhum resposta foi encontrada para a quetão');
     return isEqual(answer.text, text);
+  };
+
+  getQuestions = async (quizId: number): Promise<Array<Question>> => {
+    const data = await this.questionSchema.findAll({
+      where: { quizId }
+    });
+    return data.map(q => q.dataValues);
+  };
+
+  deleteQuestion = async (id: number): Promise<void> => {
+    await this.questionSchema.destroy({
+      where: { id },
+      cascade: true
+    });
   };
 }
 
