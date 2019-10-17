@@ -5,6 +5,7 @@ import UserView from "./views/UserView";
 import SessionView from "./views/SessionView";
 import QuizView from "./views/QuizView";
 import AuthMiddleware from "./middlewares/authMiddleware";
+import AnswerView from "./views/AnswerView";
 
 const app = express();
 const router = express.Router();
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users/", router, UserView);
 app.use("/session/", router, SessionView);
 app.use(router, AuthMiddleware);
-app.use("/quiz", router, QuizView);
+app.use("/quiz/", router, QuizView);
 app.use("/questions/", router, QuestionView);
+app.use("/answer/", router, AnswerView);
 export default app;
