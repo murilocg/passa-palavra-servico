@@ -5,6 +5,6 @@ const QuestionView = Router();
 
 QuestionView.post("/:idQuestion/answer", questionController.answerQuestion);
 QuestionView.get("/", questionController.getQuestion);
-QuestionView.post("/", questionController.createQuestion);
+QuestionView.post("/:quizId", questionController.createQuestion);
 
 export default QuestionView;

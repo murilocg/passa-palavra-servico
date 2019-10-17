@@ -11,6 +11,21 @@ class QuestionController {
       res.status(500).send({ erro });
     }
   };
+
+  getQuiz = async (req: Request, res: Response) => {
+    try {
+      const { title } = req.body;
+      const quiz = await quizModel.getQuiz(title);
+
+      if (!quiz) {
+        res.status(404).send({ error: "Quiz not found" });
+      }
+
+      res.status(200).send(quiz);
+    } catch (error) {
+      res.status(500).send({ error });
+    }
+  };
 }
 
 export default new QuestionController();

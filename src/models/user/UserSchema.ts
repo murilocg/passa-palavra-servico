@@ -1,7 +1,5 @@
 import { Model, BuildOptions } from "sequelize";
 import bcrypt from "bcryptjs";
-import User from "./User";
-import UserModel from "./UserModel";
 
 interface UserSchemaInterface extends Model {
   readonly id: number;

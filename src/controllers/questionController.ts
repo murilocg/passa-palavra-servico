@@ -4,7 +4,15 @@ import { questionModel } from "../models";
 class QuestionController {
   createQuestion = async (req: Request, res: Response) => {
     try {
-      const question = req.body;
+      const { text, letter } = req.body;
+      const { quizId } = req.params;
+
+      const question = {
+        text,
+        letter,
+        quizId
+      };
+
       const result = await questionModel.createQuestion(question);
 
       res.status(200).send(result);
