@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { questionModel } from "../models";
+import { Request, Response } from 'express';
+import { questionModel } from '../models';
 
 class QuestionController {
   createQuestion = async (req: Request, res: Response) => {
@@ -24,21 +24,38 @@ class QuestionController {
     try {
       const { idQuestion } = req.params;
       const answer = req.body.answer;
-      const result = await questionModel.answerQuestion(
-        answer,
-        Number(idQuestion)
-      );
+      const result = await questionModel.answerQuestion(answer, Number(idQuestion));
       res.status(200).send({ result });
     } catch (erro) {
       res.status(500).send({ erro });
     }
   };
 
-  getQuestion = async (req: Request, res: Response) => {
+  nextQuestion = async (req: Request, res: Response) => {
     try {
       const { letter, quizId } = req.query;
-      const question = await questionModel.getQuestion(Number(quizId), letter);
+      const question = await questionModel.nextQuestion(Number(quizId), letter);
       res.status(200).send({ question });
+    } catch (e) {
+      res.status(500).send({ message: e.message });
+    }
+  };
+
+  getQuestions = async (req: Request, res: Response) => {
+    try {
+      const { quizId } = req.query;
+      const questions = await questionModel.getQuestions(Number(quizId));
+      res.status(200).send(questions);
+    } catch (e) {
+      res.status(500).send({ message: e.message });
+    }
+  };
+
+  deleteQuestion = async (req: Request, res: Response) => {
+    try {
+      const { questionId } = req.params;
+      await questionModel.deleteQuestion(Number(questionId));
+      res.status(200).send();
     } catch (e) {
       res.status(500).send({ message: e.message });
     }

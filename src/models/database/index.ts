@@ -1,5 +1,5 @@
-const Sequelize = require("sequelize");
-const config = require("./sequelizeconfig.json");
+const Sequelize = require('sequelize');
+const config = require('./sequelizeconfig.json');
 
 class DB {
   private sequelize;
@@ -9,16 +9,11 @@ class DB {
   public UserSchema: any;
 
   constructor() {
-    this.sequelize = new Sequelize(
-      config.database,
-      config.user,
-      config.password,
-      config
-    );
-    this.UserSchema = this.sequelize.import("../user/UserSchema");
-    this.QuizSchema = this.sequelize.import("../quiz/QuizSchema");
-    this.QuestionSchema = this.sequelize.import("../question/QuestionSchema");
-    this.AnswerSchema = this.sequelize.import("../answer/AnswerSchema");
+    this.sequelize = new Sequelize(config.database, config.user, config.password, config);
+    this.UserSchema = this.sequelize.import('../user/UserSchema');
+    this.QuizSchema = this.sequelize.import('../quiz/QuizSchema');
+    this.QuestionSchema = this.sequelize.import('../question/QuestionSchema');
+    this.AnswerSchema = this.sequelize.import('../answer/AnswerSchema');
     this.QuizSchema.hasMany(this.QuestionSchema);
     this.QuizSchema.belongsTo(this.UserSchema);
     this.QuestionSchema.hasOne(this.AnswerSchema);
@@ -44,6 +39,11 @@ class DB {
       restartIdentity: true
     });
     this.AnswerSchema.destroy({
+      truncate: true,
+      cascade: true,
+      restartIdentity: true
+    });
+    this.UserSchema.destroy({
       truncate: true,
       cascade: true,
       restartIdentity: true
