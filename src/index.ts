@@ -6,6 +6,6 @@ app.listen(port, err => {
   if (err) {
     return console.error(err);
   }
-  DB.init();
+  DB.init(populateDatabase);
   return console.log(`server is listening on ${port}`);
 });

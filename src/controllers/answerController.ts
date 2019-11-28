@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import { answerModel } from "../models";
+import { Request, Response } from 'express';
+import { answerModel } from '../models';
 
 class AnswerController {
   createAnswer = async (req: Request, res: Response) => {
     try {
       const { questionId } = req.params;
-      const { text } = req.body;
+      const { resposta } = req.body;
 
-      const answer = { questionId, text };
+      const answer = { questionId, text: resposta };
 
       const result = await answerModel.createAnswer(answer);
 
