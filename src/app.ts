@@ -21,7 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users/', router, UserView);
 app.use('/session/', router, SessionView);
-// app.use(router, AuthMiddleware);
 app.use('/quiz/', router, QuizView);
 app.use('/questions/', router, QuestionView);
 app.use('/answer/', router, AnswerView);
